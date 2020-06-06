@@ -12,9 +12,9 @@ To Boost Develop pace for iOS basic components.
 ## Code
 
 #### Item view for cell
+You only need to inherited JJCustomCellItemView and assigned upcoming data type. and override initUI() and updateUI()
 <pre><code>
-
-//with type [String:Any]
+// with type [String:Any]
 class My1Cell: JJCustomCellItemView<[String:Any]> { 
     let _label : UILabel = UILabel()
     
@@ -68,14 +68,16 @@ class My2Cell: JJCustomCellItemView<cell2Model> {
 <pre><code>
 _tableDelegate = JJTableViewDelegate(_tableView)
                 .registWithCellStructs([
-                    "aCell" : JJCustomCellStruct(itemView: My1Cell.self),
+                    //Use aCell as reuseId, and My1Cell as itemView
+                    "aCell" : JJCustomCellStruct(itemView: My1Cell.self), 
                     "bCell" : JJCustomCellStruct(itemView: My2Cell.self)
                 ])
                 .numOfSection(1)
                 .numOfRowInSection({ (section) -> Int in
                     return 50
                 })
-                .cellHeightWithIndex({ (section, row) -> CGFloat in
+                //assign reuseId refers to the Ids you declares in registWithCellStructs
+                .cellHeightWithIndex({ (section, row) -> CGFloat in 
                     return row%3==0 ? 50 : 80
                 })
                 .cellReuseIdentifierWithIndex({ (section, row) -> String in
