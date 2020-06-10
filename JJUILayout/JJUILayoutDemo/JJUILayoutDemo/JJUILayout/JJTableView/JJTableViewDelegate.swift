@@ -104,8 +104,8 @@ extension JJTableViewDelegate : UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         if (cell._itemView == nil) {
-            guard let itemViewClass = itemType as? NSObject.Type else { return cell }
-            guard let itemView = itemViewClass.init() as? JJCellItemViewProtocol else { return cell }
+            let itemViewClass = itemType.self// as NSObject.Type else { return cell }
+            let itemView = itemViewClass.init()// as? JJCellItemViewProtocol else { return cell }
             cell.addItemView(itemView)
         }
         

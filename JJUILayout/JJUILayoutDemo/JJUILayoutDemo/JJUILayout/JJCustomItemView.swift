@@ -49,5 +49,5 @@ extension JJCustomCellItemView : JJCellItemViewProtocol {
 
 
 struct JJCustomCellStruct {
-    var itemView : AnyClass? //must confirm tableItemView
+    var itemView : JJCellItemViewProtocol.Type? //must confirm tableItemView
 }
