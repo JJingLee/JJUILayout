@@ -9,8 +9,11 @@
 import UIKit
 
 //MARK: - itemView
+typealias JJCellItemEvent = (_ indexPath : IndexPath, _ eventType:String, _ model : Any)->Void
 protocol JJCellItemViewProtocol : UIView {
+    var _indexPath : IndexPath { get set }
     func updateData(_ event : String?, _ data : Any?)
+    func forwardEvent(_ eventClosure : @escaping JJCellItemEvent)
 }
 protocol JJCellItemViewLayoutProtocol {
     associatedtype DataSourceT
@@ -20,6 +23,9 @@ protocol JJCellItemViewLayoutProtocol {
 
 class JJCustomCellItemView<DataT> : UIView, JJCellItemViewLayoutProtocol {
     typealias DataSourceT = DataT
+    var _indexPath : IndexPath = IndexPath(row: 0, section: 0)
+     /** send to delegate */
+    var sendEvent : JJCellItemEvent = {_,_,_  in}
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +44,10 @@ class JJCustomCellItemView<DataT> : UIView, JJCellItemViewLayoutProtocol {
 }
 
 extension JJCustomCellItemView : JJCellItemViewProtocol {
+    func forwardEvent(_ eventClosure: @escaping JJCellItemEvent) {
+        self.sendEvent = eventClosure
+    }
+    
     func updateData(_ event: String?, _ data: Any?) {
         guard let _data = data as? DataT else {
             return

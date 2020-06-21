@@ -13,7 +13,48 @@ class ViewController: UIViewController {
     private var _tableViewDelegate : JJTableViewDelegate?
     private let pages : [String:AnyClass] = [
         "tableViewDemo" : TableViewControllerDemo.self,
+        "staticSheetViewController" : JJStaticSheetViewController.self
     ]
+    
+    private func exceptHandle(_ targetVC : UIViewController) {
+        if let staticSheet = targetVC as? JJStaticSheetViewController {
+            
+            var myModel : [[String:Any]] = [
+                [
+                    kJJStaticSheetCardType : "cell1",
+                    kJJStaticSheetCardModel : ["name": "cell1"],
+                    kJJStaticSheetCardHeight : 60
+                ],
+                [
+                    kJJStaticSheetCardType : "cell2",
+                    kJJStaticSheetCardModel : ["name": "cell2"],
+                    kJJStaticSheetCardHeight : 80,
+                    "isExpand" : 1
+                ],
+                [
+                    kJJStaticSheetCardType : "cell1",
+                    kJJStaticSheetCardModel : ["name": "cell1"],
+                    kJJStaticSheetCardHeight : 44
+                ],
+            ]
+            
+            staticSheet
+                .registCardType(cardType: "cell1", withClass: My1Cell.self)
+                .registCardType(cardType: "cell2", withClass: My2Cell.self)
+                .handleEvents { (indexPath, eventName, data) in
+                    if (eventName == "buttonTap") {
+                        print("\(data)")
+                        myModel[1]["isExpand"] = (myModel[1]["isExpand"] as! Int) ^ 1
+                        let isExpand = myModel[1]["isExpand"] as! Int
+                        myModel[1][kJJStaticSheetCardHeight] = (isExpand > 0) ? 80 : 50
+                        staticSheet.addSheetModel(myModel)
+                    }
+            }
+            
+            staticSheet.addSheetModel(myModel)
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +80,7 @@ class ViewController: UIViewController {
                 guard let targetVC = classType.init() as? UIViewController else {
                     return
                 }
+                self.exceptHandle(targetVC)
                 self.navigationController?.pushViewController(targetVC, animated: true)
             })
         

@@ -95,6 +95,16 @@ struct cell2Model {
 }
 class My2Cell: JJCustomCellItemView<cell2Model> {
     let _label : UILabel = UILabel()
+    let _button : UIButton = {
+        let _btn = UIButton()
+        _btn.setTitle("tap", for: .normal)
+        _btn.setTitleColor(UIColor.red, for: .normal)
+        return _btn
+    }()
+    
+    @objc func buttonTap(_ sender : Any) {
+        self.sendEvent(self._indexPath, "buttonTap","got it ?")
+    }
     
     override func initUI() {
         super.initUI()
@@ -104,6 +114,16 @@ class My2Cell: JJCustomCellItemView<cell2Model> {
         self.addConstraints([
             _label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             _label.leftAnchor.constraint(equalTo: self.leftAnchor),
+        ])
+        
+        _button.addTarget(self, action: #selector(self.buttonTap(_:)), for: .touchUpInside)
+        _button.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(_button)
+        self.addConstraints([
+            _button.widthAnchor.constraint(equalToConstant: 60),
+            _button.heightAnchor.constraint(equalToConstant: 44),
+            _button.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
+            _button.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
         
     }

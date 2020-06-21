@@ -19,6 +19,7 @@
 		832D62AA248BD23B00A86401 /* JJTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D62A9248BD23B00A86401 /* JJTableViewDelegate.swift */; };
 		832D62AC248BD26300A86401 /* TableViewControllerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D62AB248BD26300A86401 /* TableViewControllerDemo.swift */; };
 		832D62AE248BD3A400A86401 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 832D62AD248BD3A400A86401 /* README.md */; };
+		832D62EC249F4F6A00A86401 /* JJStaticSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832D62EB249F4F6A00A86401 /* JJStaticSheetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		832D62A9248BD23B00A86401 /* JJTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJTableViewDelegate.swift; sourceTree = "<group>"; };
 		832D62AB248BD26300A86401 /* TableViewControllerDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerDemo.swift; sourceTree = "<group>"; };
 		832D62AD248BD3A400A86401 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		832D62EB249F4F6A00A86401 /* JJStaticSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJStaticSheetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				832D6277248BD18E00A86401 /* SceneDelegate.swift */,
 				832D6279248BD18E00A86401 /* ViewController.swift */,
 				832D62AB248BD26300A86401 /* TableViewControllerDemo.swift */,
+				832D62EB249F4F6A00A86401 /* JJStaticSheetViewController.swift */,
 				832D62A5248BD1F700A86401 /* JJUILayout */,
 				832D627B248BD18E00A86401 /* Main.storyboard */,
 				832D627E248BD19000A86401 /* Assets.xcassets */,
@@ -291,6 +294,7 @@
 				832D627A248BD18E00A86401 /* ViewController.swift in Sources */,
 				832D62AA248BD23B00A86401 /* JJTableViewDelegate.swift in Sources */,
 				832D6276248BD18E00A86401 /* AppDelegate.swift in Sources */,
+				832D62EC249F4F6A00A86401 /* JJStaticSheetViewController.swift in Sources */,
 				832D62A8248BD23400A86401 /* JJCustomItemView.swift in Sources */,
 				832D62AC248BD26300A86401 /* TableViewControllerDemo.swift in Sources */,
 				832D6278248BD18E00A86401 /* SceneDelegate.swift in Sources */,

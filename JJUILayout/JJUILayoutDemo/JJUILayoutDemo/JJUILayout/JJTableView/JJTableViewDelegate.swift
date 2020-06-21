@@ -16,6 +16,7 @@ class JJTableViewDelegate: NSObject {
     private var _cellStructMap : [String:JJCustomCellStruct] = [:]
     private var _cellHeight : (_ section : Int, _ row : Int)->CGFloat = {_,_ in return 60}
     private var _selectForCell : (_ section : Int, _ row : Int)->Void = {_,_ in }
+    private var _itemEventForwarder : JJCellItemEvent = {_,_,_ in }
     
     private weak var _tableView : UITableView?
     
@@ -84,6 +85,14 @@ class JJTableViewDelegate: NSObject {
         return self
     }
     
+    /**
+        Get event from items. (indexPath:IndexPath, eventType:String, Data:Any)
+     */
+    func addItemEventHandler(_ handler : @escaping JJCellItemEvent)->Self {
+        _itemEventForwarder = handler
+        return self
+    }
+    
 }
 
 extension JJTableViewDelegate : UITableViewDelegate, UITableViewDataSource {
@@ -106,9 +115,12 @@ extension JJTableViewDelegate : UITableViewDelegate, UITableViewDataSource {
         if (cell._itemView == nil) {
             let itemViewClass = itemType.self// as NSObject.Type else { return cell }
             let itemView = itemViewClass.init()// as? JJCellItemViewProtocol else { return cell }
+            itemView.forwardEvent { [weak self] (indexPath, eventType, Data) in
+                self?._itemEventForwarder(indexPath, eventType, Data)
+            }
             cell.addItemView(itemView)
         }
-        
+        cell._itemView?._indexPath = indexPath
         cell._itemView?.updateData("", _cellModel(indexPath.section, indexPath.row))
         return cell
     }
